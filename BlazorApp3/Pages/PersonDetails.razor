@@ -1,0 +1,8 @@
+﻿<text> Person: </text>
+
+@Person.Id  @((MarkupString)@Person.Name)   @Person.Family
+<hr />
+
+@code {
+    [Parameter] public Person Person { get; set; }
+}

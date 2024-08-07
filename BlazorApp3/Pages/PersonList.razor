@@ -1,0 +1,31 @@
+﻿<h3>PersonList</h3>
+
+@*
+<input class="btn btn-outline-primary" type="button" value="AddItem" @onclick="AddItem" />
+ *@
+
+<!--
+    <b>ali</b>
+-->
+
+<hr />
+
+@if (People != null)
+{
+    @foreach (var person in People)
+    {
+        <input class="btn btn-danger" type="button" value="Del" @onclick="@( ()=> Delete.InvokeAsync(person))" />
+        <PersonDetails Person="@person" />
+    }
+}
+else
+{
+    <Loading />
+}
+
+@code {
+
+    [Parameter] public List<Person> People { get; set; }
+    [Parameter] public EventCallback<Person> Delete { get; set; }
+
+}
