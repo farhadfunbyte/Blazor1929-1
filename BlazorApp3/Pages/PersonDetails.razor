@@ -1,8 +1,16 @@
 ﻿<text> Person: </text>
 
 @Person.Id  @((MarkupString)@Person.Name)   @Person.Family
+
+@FirstParameter
 <hr />
 
+
+
 @code {
+
+    [CascadingParameter(Name = "FirstParameter")]
+    private string FirstParameter { get; set; }
+
     [Parameter] public Person Person { get; set; }
 }

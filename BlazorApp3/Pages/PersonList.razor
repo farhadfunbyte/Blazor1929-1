@@ -1,4 +1,4 @@
-﻿<h3>PersonList</h3>
+﻿@* @HeaderContent *@
 
 @*
 <input class="btn btn-outline-primary" type="button" value="AddItem" @onclick="AddItem" />
@@ -9,6 +9,14 @@
 -->
 
 <hr />
+
+<strong>@FirstParameter</strong>
+
+<br/>
+
+<strong>@FirstParameter2</strong>
+
+<br />
 
 @if (People != null)
 {
@@ -23,9 +31,19 @@ else
     <Loading />
 }
 
+@* @FooterContent *@
+
 @code {
+
+    [CascadingParameter(Name = "FirstParameter")]
+    private string FirstParameter { get; set; }
+
+    [CascadingParameter(Name = "FirstParameter2")]
+    private string FirstParameter2 { get; set; }
+
 
     [Parameter] public List<Person> People { get; set; }
     [Parameter] public EventCallback<Person> Delete { get; set; }
-
+    // [Parameter] public RenderFragment HeaderContent { get; set; }
+    // [Parameter] public RenderFragment FooterContent { get; set; }
 }

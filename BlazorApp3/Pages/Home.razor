@@ -4,13 +4,26 @@
 
 <h1>Hello</h1>
 
-<PersonList People="people" Delete="Delete" />
+
+
+
+<CascadingValue Name="FirstParameter" Value="@cParam">
+    <CascadingValue Name="FirstParameter2" Value="@cParam2">
+
+        <PersonList People="people" Delete="Delete" />
+
+    </CascadingValue>
+</CascadingValue>
 
 @code {
 
 
     private int a = 1;
     private List<Person> people;
+
+    private string cParam = "پارامتر آبشاری یک";
+    private string cParam2 = "پارامتر آبشاری دو";
+
 
     protected override async Task OnInitializedAsync()
     {
