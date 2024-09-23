@@ -1,11 +1,14 @@
 ﻿@page "/"
 
+@inject IJSRuntime jSRuntime
+@inject SweetAlertService Swal;
+@inject NavigationManager navigationManager
+
 <PageTitle>خانه</PageTitle>
 
 <h1>Hello</h1>
 
-
-
+<input class="btn btn-danger" type="button" value="Test" @onclick="AddItem" />
 
 <CascadingValue Name="FirstParameter" Value="@cParam">
     <CascadingValue Name="FirstParameter2" Value="@cParam2">
@@ -41,15 +44,47 @@
     }
 
 
-    private void AddItem()
+    private async Task AddItem()
     {
+        //alert("Hello! I am an alert box!!");
+        //await jSRuntime.InvokeVoidAsync("sweet_alert", "Test Alert!", "AAAAAAA", "success");
+        //await jSRuntime.InvokeVoidAsync("Swal.fire", "Test Alert!", "AAAAAAA", "success");
+
+        await Swal.FireAsync("Oops...", navigationManager.Uri, "error");
+
+
         Console.WriteLine("Item Added!");
         a++;
+
+
+        navigationManager.NavigateTo("/weather");
+
     }
 
-    private void Delete(Person person)
+    private async Task Delete(Person person)
     {
-        people.Remove(person);
+        //bool result = await jSRuntime.InvokeAsync<bool>("test_confirm", "آیا حذف شود!");
+
+        SweetAlertResult result = await Swal.FireAsync(new SweetAlertOptions
+            {
+                Title = "Are you sure?",
+                Text = "You will not be able to recover this imaginary file!",
+                Icon = SweetAlertIcon.Question,
+                ShowCancelButton = true,
+                ConfirmButtonText = "Yes, delete it!",
+                CancelButtonText = "No, keep it",
+                Backdrop = true,
+            });
+
+
+        if (result.IsConfirmed == true)
+        {
+            people.Remove(person);
+        }
+
+
+
+
     }
 
 
